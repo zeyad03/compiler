@@ -39,7 +39,19 @@ const char *sym[19] = {
   '~', '>', '<'
 };
 
+static unsigned char *buffer;
 
+long getFilesize(FILE *fptr)
+{
+  long filesize;
+
+  if (fseek(fptr, 0, SEEK_END) != 0) exit(0);
+
+  filesize = ftell(fptr);
+  rewind(fptr);
+
+  return filesize;
+}
 
 // IMPLEMENT THE FOLLOWING functions
 //***********************************
@@ -55,8 +67,11 @@ int InitLexer (char* file_name)
 
   if (fp == NULL)
   {
+    printf("Error: file does not exist\n");
     return 0;
   }
+
+  fread(buffer, sizeof(unsigned char), 5000, fp);
 
   return 1;
 }
