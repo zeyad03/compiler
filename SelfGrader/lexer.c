@@ -32,7 +32,7 @@ const char *reswords[21] = {
   "this"
 };
 
-const char *sym[19] = {
+const char symbols[19] = {
   ')', '(', '[', ']', '{', '}',
   ',', ';', '=', '.',
   '+', '-', '*', '/', '&', '|',
@@ -63,7 +63,8 @@ long getFilesize(FILE *fptr)
 // if everything goes well the function should return 1
 int InitLexer (char* file_name)
 {
-  FILE *fp = fopen(file_name, "r");
+  long filesize;
+  FILE *fp = fopen(file_name, "rb");
 
   if (fp == NULL)
   {
@@ -71,7 +72,16 @@ int InitLexer (char* file_name)
     return 0;
   }
 
-  fread(buffer, sizeof(unsigned char), 5000, fp);
+  filesize = getFilesize(fp);
+  if (filesize < 1) return 0;
+
+  buffer = malloc(filesize * sizeof(unsigned char));
+  if (buffer == NULL) return 0;
+
+  if((fread(buffer, sizeof(unsigned char), filesize, fp)) != filesize)
+    return 0;
+
+  fclose(fp);
 
   return 1;
 }
