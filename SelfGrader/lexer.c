@@ -23,9 +23,21 @@ Date Work Commenced:
 
 
 // YOU CAN ADD YOUR OWN FUNCTIONS, DECLARATIONS AND VARIABLES HERE
+const char *reswords[21] = {
+  "class", "constructor", "method", "function",
+  "int", "boolean", "char", "void",
+  "var", "static", "field",
+  "let", "do", "if", "else", "while", "return",
+  "ture", "false", "null",
+  "this"
+};
 
-
-
+const char *sym[19] = {
+  ')', '(', '[', ']', '{', '}',
+  ',', ';', '=', '.',
+  '+', '-', '*', '/', '&', '|',
+  '~', '>', '<'
+};
 
 
 
