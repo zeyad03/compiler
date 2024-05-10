@@ -283,19 +283,19 @@ int StopLexer ()
 #ifndef TEST
 int main(int argc, char *argv[]) {
   if (argc < 2) {
-    file_streamrintf(stderr, "Usage: %s <filename>\n", argv[0]);
+    fprintf(stderr, "Usage: %s <filename>\n", argv[0]);
     return 1;
   }
 
   if (!InitLexer(argv[1])) {
-    file_streamrintf(stderr, "Failed to initialize lexer\n");
+    fprintf(stderr, "Failed to initialize lexer\n");
     return 1;
   }
 
   Token next_token;
   while ((next_token = GetNextToken()).tp != EOFile) {
     if (next_token.tp == ERR) {
-      file_streamrintf(stderr, "Error on line %d: %s\n", next_token.ln, next_token.lx);
+      fprintf(stderr, "Error on line %d: %s\n", next_token.ln, next_token.lx);
       continue;
     }
 
